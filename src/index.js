@@ -16,6 +16,7 @@ refs.searchForm.addEventListener('submit', event => {
     newsService.fetchArticles().then(articles => {
         updateArticlesMarkup(articles)
         page += 1;
+        refs.loadMoreBtn.classList.remove('is-hidden')
     });
 
 });
