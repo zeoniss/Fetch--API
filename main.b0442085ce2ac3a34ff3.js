@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[0],{QfWi:function(n,e,t){"use strict";t.r(e);t("JBxO"),t("FdtR"),t("yjly");fetch("http://newsapi.org/v2/everything?query=bitcoin&apiKey=919e5e36fb6c4976a92665bad143e6d2").then((function(n){return n.json()})).then((function(n){return console.log(n)}))},yjly:function(n,e,t){}},[["QfWi",1,2]]]);
-//# sourceMappingURL=main.b0442085ce2ac3a34ff3.js.map
