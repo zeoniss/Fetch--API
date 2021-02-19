@@ -1,6 +1,7 @@
-const refs = {
-    searchForm: document.querySelector('.js-search-form'),
-    articlesContainer: document.querySelector('.js-articles'),
-    loadMoreBtn: document.querySelector('[data-action="load-more"]'),
+const searchForm = document.querySelector('.js-search-form');
+const articlesContainer = document.querySelector('.js-articles');
+
+export default {
+    searchForm,
+    articlesContainer,
 };
-export default refs;

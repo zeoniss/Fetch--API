@@ -1,28 +1,39 @@
-import './sass/styles.scss';
 import newsService from './js/news-service';
 import updateArticlesMarkup from './js/update-articles-markup';
+import LoadMoreBtn from './js/components/load-more-button';
 import refs from './js/refs';
-let searchQuery = '';
-let page = 1;
+import './sass/styles.scss';
 
-refs.searchForm.addEventListener('submit', event => {
+const loadMoreBtn = new LoadMoreBtn({
+    selector: 'button[data-action="load-more"]',
+    hidden: true,
+});
+
+refs.searchForm.addEventListener('submit', searchFormSubmitHandler);
+loadMoreBtn.refs.button.addEventListener('click', fetchArticles);
+
+function searchFormSubmitHandler(event) {
     event.preventDefault();
 
     const form = event.currentTarget;
     newsService.query = form.elements.query.value;
-    refs.articlesContainer.innerHTML = '';
-    form.reset();
-    newsService.resetPage();
-    newsService.fetchArticles().then(articles => {
-        updateArticlesMarkup(articles)
-        page += 1;
-        refs.loadMoreBtn.classList.remove('is-hidden')
-    });
 
-});
-refs.loadMoreBtn.addEventListener('click', () => {
-    newsService.fetchArticles(searchQuery).then(articles => {
+    clearArticlesContainer();
+    newsService.resetPage();
+    fetchArticles();
+    form.reset();
+}
+
+function fetchArticles() {
+    loadMoreBtn.disable();
+
+    newsService.fetchArticles().then(articles => {
         updateArticlesMarkup(articles);
-        page += 1;
-    })
-})
+        loadMoreBtn.show();
+        loadMoreBtn.enable();
+    });
+}
+
+function clearArticlesContainer() {
+    refs.articlesContainer.innerHTML = '';
+}
